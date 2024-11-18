@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Team</title>
-    <link rel="stylesheet" href="style.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
 </head>
 
 <style>
@@ -98,7 +98,7 @@ header .van ul li a{
 }
 
 header .burger {
-    display: none; /* Ensure it's visible */
+    display: none;
     flex-direction: column;
     justify-content: space-evenly;
     height: 40px;
@@ -125,6 +125,7 @@ header .burger .line {
 header .van.show{
     left:0px;
 }
+
 /* Adding effect to burger to a Cross*/
 .line.alter-1 {
     transform: rotate(45deg) translateY(16px);
@@ -155,7 +156,7 @@ header .van.show{
 }
 
 
-/* css slider */
+/* Slider CSS */
 .slider{
     height: 100vh;
     margin-top: 0px;
@@ -461,7 +462,6 @@ header .van.show{
             </div>
         </div>
     </div>
-
 
 <script>
     let items = document.querySelectorAll('.slider .list .item');
