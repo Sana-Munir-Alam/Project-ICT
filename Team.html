@@ -306,7 +306,7 @@ header .van.show{
 <body>
     <!-- header Navigation Bar-->
     <header>
-        <div class="logo">Name</div>
+        <div class="logo">S I T A</div>
 
         <div class="container">
             <div class="burger" onclick="switch1();">
@@ -316,23 +316,23 @@ header .van.show{
             </div>            
             <van class="van"> <!-- Off-Screen Menu-->
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Menu</a></li>
+                    <li><a href="Main.html">Home</a></li>
+                    <li><a href="Main.html">Menu</a></li>
                     <li><a href="Team.html">Team</a></li>
-                    <li><a href="">Blog</a></li>
-                    <li><a href="">Offer</a></li>
-                    <li><a href="">Gallery</a></li>
+                    <li><a href="Blog.html">Blog</a></li>
+                    <li><a href="Offer.html">Offer</a></li>
+                    <li><a href="Gallery.html">Gallery</a></li>
                     <li><a href="Reservation.html">Reservation</a></li>
                 </ul>
             </van>
             <nav>
                 <ul class="menu">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Menu</a></li>
+                    <li><a href="Main.html">Home</a></li>
+                    <li><a href="Menu.html">Menu</a></li>
                     <li><a href="Team.html">Team</a></li>
-                    <li><a href="">Blog</a></li>
-                    <li><a href="">Offer</a></li>
-                    <li><a href="">Gallery</a></li>
+                    <li><a href="Blog.html">Blog</a></li>
+                    <li><a href="Offer.html">Offer</a></li>
+                    <li><a href="Gallery.html">Gallery</a></li>
                     <li><a href="Reservation.html">Reservation</a></li>
                 </ul>
             </nav>
@@ -346,7 +346,7 @@ header .van.show{
             <div class="item active">
                 <img src="https://www.foodserviceequipmentjournal.com/2017/08/open-kitchen.jpeg">
                 <div class="content">
-                    <p>Restaraunt Name</p>
+                    <p>SITA</p>
                     <h3>Our Team</h3>
                     <p>
                         At our restaurant, we believe that great food begins with a great team. Our talented chefs bring passion, creativity, and dedication to every dish they prepare, ensuring that each plate is a reflection of their love for the culinary arts. From crafting bold, innovative flavors to perfecting timeless classics, our kitchen is a place where tradition meets creativity, and quality is at the heart of everything we do.<br>
@@ -464,103 +464,113 @@ header .van.show{
     </div>
 
 <script>
-    let items = document.querySelectorAll('.slider .list .item');
-    let next = document.getElementById('next');
-    let prev = document.getElementById('prev');
-    let thumbnails = document.querySelectorAll('.thumbnail .item');
+    // Select all slider items, next and previous buttons, and thumbnails
+    let items = document.querySelectorAll('.slider .list .item'); // List of slider items
+    let next = document.getElementById('next'); // Button to move to the next slide
+    let prev = document.getElementById('prev'); // Button to move to the previous slide
+    let thumbnails = document.querySelectorAll('.thumbnail .item'); // List of thumbnail items
 
-    // config param
-    let countItem = items.length;
-    let itemActive = 0;
+    // Configuration parameters
+    let countItem = items.length; // Total number of slider items
+    let itemActive = 0; // Index of the currently active slider item
 
-    // Event next click (move to one slide ahead)
-    next.onclick = function(){
-        itemActive = itemActive + 1;
-        if(itemActive >= countItem){
+    // Event listener for the "Next" button click (move to the next slide)
+    next.onclick = function() {
+        itemActive = itemActive + 1; // Increment the active item index
+        if (itemActive >= countItem) { // Loop back to the first slide if the index exceeds the last slide
             itemActive = 0;
         }
-        showSlider();
+        showSlider(); // Update the slider display
     }
-    // Event prev click (move to one slide back)
-    prev.onclick = function(){
-        itemActive = itemActive - 1;
-        if(itemActive < 0){
+
+    // Event listener for the "Previous" button click (move to the previous slide)
+    prev.onclick = function() {
+        itemActive = itemActive - 1; // Decrement the active item index
+        if (itemActive < 0) { // Loop back to the last slide if the index becomes negative
             itemActive = countItem - 1;
         }
-        showSlider();
+        showSlider(); // Update the slider display
     }
-    // auto run slider
-    let refreshInterval = setInterval(() => {
-        next.click();
-    }, 9000)    // 9 seconds for auto slide
 
-    function showSlider(){
-        // remove item active old
+    // Automatically run the slider every 9 seconds
+    let refreshInterval = setInterval(() => {
+        next.click(); // Simulate a click on the "Next" button
+    }, 9000); // 9-second interval
+
+    // Function to update the slider display
+    function showSlider() {
+        // Remove the "active" class from the previously active slider item and thumbnail
         let itemActiveOld = document.querySelector('.slider .list .item.active');
         let thumbnailActiveOld = document.querySelector('.thumbnail .item.active');
         itemActiveOld.classList.remove('active');
         thumbnailActiveOld.classList.remove('active');
 
-        // active new item
+        // Add the "active" class to the newly active slider item and thumbnail
         items[itemActive].classList.add('active');
         thumbnails[itemActive].classList.add('active');
-        setPositionThumbnail(); //ensure the active thumbnail is properly positioned within the viewport.
 
-        // clear auto time run slider
-        clearInterval(refreshInterval);
+        // Ensure the active thumbnail is visible in the viewport
+        setPositionThumbnail();
+
+        // Reset the auto-slider interval to prevent interference from manual interactions
+        clearInterval(refreshInterval); // Clear the previous interval
         refreshInterval = setInterval(() => {
-            next.click();
-        }, 5000)
+            next.click(); // Restart the auto-slider
+        }, 5000); // Set the interval to 5 seconds
     }
-    function setPositionThumbnail () {
-        let thumbnailActive = document.querySelector('.thumbnail .item.active');
-        let rect = thumbnailActive.getBoundingClientRect();
+
+    // Function to ensure the active thumbnail is properly positioned within the viewport
+    function setPositionThumbnail() {
+        let thumbnailActive = document.querySelector('.thumbnail .item.active'); // Get the active thumbnail
+        let rect = thumbnailActive.getBoundingClientRect(); // Get its position relative to the viewport
+
+        // If the thumbnail is outside the viewport, scroll it into view
         if (rect.left < 0 || rect.right > window.innerWidth) {
             thumbnailActive.scrollIntoView({ behavior: 'smooth', inline: 'nearest' });
         }
     }
 
-    // click thumbnail
+    // Add click event listeners to each thumbnail
     thumbnails.forEach((thumbnail, index) => {
         thumbnail.addEventListener('click', () => {
-            itemActive = index;
-            showSlider();
-        })
+            itemActive = index; // Set the clicked thumbnail's index as the active index
+            showSlider(); // Update the slider display
+        });
     })
 
-    //Navigation Bar
-    let flag = false;
-    let nav = document.querySelector('.van')
-    let line = document.querySelectorAll('.line')
-    function switch1() {
-    if (flag == false) {
-        setTimeout(() => {
-        nav.classList.add('show');
-        }, 100);
-        line[0].classList.add('alter-1');
-        line[1].classList.add('alter-2');
-        line[2].classList.add('alter-3');
-        flag = true;
-    }
-    else if (flag == true) {
-        setTimeout(() => {
-        nav.classList.remove('show');
-        }, 100);
-        line[0].classList.remove('alter-1');
-        line[1].classList.remove('alter-2');
-        line[2].classList.remove('alter-3');
-        flag = false;
-    }
-    }
-    window.addEventListener("load", function() {
-    const preloader = document.querySelector(".wrapper");
-    preloader.style.transition = "opacity 0.5s ease";
-    preloader.style.opacity = "0";
+    // Navigation Bar Toggle functionality
+    let flag = false; // Flag to track whether the navigation is shown or hidden
+    let nav = document.querySelector('.van'); // Select the navigation element
+    let line = document.querySelectorAll('.line'); // Select the elements representing lines (menu icon)
 
-    setTimeout(() => {
-        preloader.style.display = "none";
-    }, 500);
-    });
+    // Function to switch the state of the navigation menu and lines
+    function switch1() {
+        if (flag == false) {
+            // If the menu is not visible, show it after 100ms
+            setTimeout(() => {
+                nav.classList.add('show');
+            }, 100);
+
+            // Add animation classes to transform the lines into a hamburger icon
+            line[0].classList.add('alter-1');
+            line[1].classList.add('alter-2');
+            line[2].classList.add('alter-3');
+
+            flag = true; // Set the flag to true indicating the menu is shown
+        } else if (flag == true) {
+            // If the menu is visible, hide it after 100ms
+            setTimeout(() => {
+                nav.classList.remove('show');
+            }, 100);
+
+            // Remove the animation classes from the lines to reset the hamburger icon
+            line[0].classList.remove('alter-1');
+            line[1].classList.remove('alter-2');
+            line[2].classList.remove('alter-3');
+
+            flag = false; // Set the flag to false indicating the menu is hidden
+        }
+    }
 </script>
 </body>
 </html>
