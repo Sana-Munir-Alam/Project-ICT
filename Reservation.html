@@ -58,7 +58,7 @@ header .menu li a {
     text-decoration: none;
     font-weight: 500;
     padding: 10px 15px;
-    transition: background 0.3s, color 0.3s;
+    transition: background 0.3s, color 0.3s;    /*Transition when hovering*/
     border-radius: 5px;
 }
 header .menu li a:hover {
@@ -169,7 +169,7 @@ header .van.show{
 }
 .card-container{
     display: grid;
-    grid-template-columns: 0px 420px;
+    grid-template-columns: 0px 420px;   /*Two cards where one card is reservation and one has been vanished*/
     min-height: 780px;
 }
 .card-img{
@@ -208,7 +208,6 @@ header .van.show{
     padding:15px 0px 10px 0px;
 
 }
-
 .card-content label{
     margin-bottom: 25px;
     font-size: 1.1em;
@@ -306,7 +305,7 @@ header .van.show{
 <body>
     <!-- header Navigation Bar-->
     <header>
-        <div class="logo">Name</div>
+        <div class="logo">S I T A</div>
 
         <div class="container">
             <div class="burger" onclick="switch1();">
@@ -316,23 +315,23 @@ header .van.show{
             </div>            
             <van class="van"> <!-- Off-Screen Menu-->
                 <ul>
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Menu</a></li>
+                    <li><a href="Main.html">Home</a></li>
+                    <li><a href="Main.html">Menu</a></li>
                     <li><a href="Team.html">Team</a></li>
-                    <li><a href="">Blog</a></li>
-                    <li><a href="">Offer</a></li>
-                    <li><a href="">Gallery</a></li>
+                    <li><a href="Blog.html">Blog</a></li>
+                    <li><a href="Offer.html">Offer</a></li>
+                    <li><a href="Gallery.html">Gallery</a></li>
                     <li><a href="Reservation.html">Reservation</a></li>
                 </ul>
             </van>
             <nav>
                 <ul class="menu">
-                    <li><a href="">Home</a></li>
-                    <li><a href="">Menu</a></li>
+                    <li><a href="Main.html">Home</a></li>
+                    <li><a href="Main.html">Menu</a></li>
                     <li><a href="Team.html">Team</a></li>
-                    <li><a href="">Blog</a></li>
-                    <li><a href="">Offer</a></li>
-                    <li><a href="">Gallery</a></li>
+                    <li><a href="Blog.html">Blog</a></li>
+                    <li><a href="Offer.html">Offer</a></li>
+                    <li><a href="Gallery.html">Gallery</a></li>
                     <li><a href="Reservation.html">Reservation</a></li>
                 </ul>
             </nav>
@@ -343,7 +342,7 @@ header .van.show{
         <p>Let us save a cozy spot just for you -<br> reserve today and indulge in warm, handcrafted flavors.</p>
         <div class="card-container">
             <div class="card-img">
-                <!-- image here(this is simply dont to keep the form in center)-->
+                <!-- image here(this is simply done to keep the form in center ignore it)-->
             </div>
 
             <div class="card-content">
@@ -425,67 +424,80 @@ header .van.show{
     </section>
 
 <script>
+    // Function to format phone numbers
     function formatPhoneNumber(input) {
-        let cleaned = input.value.replace(/\D/g, ''); // Remove all non-digit characters
-        let formatted = '';
-        // Format according to phone pattern (XXX-XXX-XXXX)
+        let cleaned = input.value.replace(/\D/g, '');   // Remove all non-digit characters using a regular expression
+        let formatted = ''; // Initialize an empty string to hold the formatted phone number
+
+        // Conditional blocks to format the phone number depending on the number of digits
         if (cleaned.length <= 3) {
-            formatted = cleaned;
+            formatted = cleaned; // If the number has 3 or fewer digits, just return it as is
         } else if (cleaned.length <= 6) {
-            formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;
+            formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3)}`;   // Format as XXX-XXX if the number has between 4 and 6 digits
         } else {
-            formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;
+            formatted = `${cleaned.slice(0, 3)}-${cleaned.slice(3, 6)}-${cleaned.slice(6, 10)}`;    // Format as XXX-XXX-XXXX if the number has more than 6 digits
         }
-        input.value = formatted; // Update the input field with formatted value
+        input.value = formatted; // Update the input field with the formatted value
     }
+
+    // Function to format credit card numbers
     function formatCreditCard(input){
-        let cleaned = input.value.replace(/\D/g, ''); // Remove all non-digit characters
+        // Remove all non-digit characters from the input value
+        let cleaned = input.value.replace(/\D/g, ''); 
+
+        // Initialize an empty string to hold the formatted credit card number
         let formatted = '';
-        // Format according to phone pattern (XXXX-XXXX-XXXX-XXXX)
+
+        // Conditional blocks to format the credit card number depending on the number of digits
         if (cleaned.length <= 4) {
-        formatted = cleaned;
+            formatted = cleaned; // If there are 4 or fewer digits, return as is
         } else if (cleaned.length <= 8) {
+            // Format as XXXX XXXX for 5 to 8 digits
             formatted = `${cleaned.slice(0, 4)} ${cleaned.slice(4)}`;
         } else if (cleaned.length <= 12) {
+            // Format as XXXX XXXX XXXX for 9 to 12 digits
             formatted = `${cleaned.slice(0, 4)} ${cleaned.slice(4, 8)} ${cleaned.slice(8)}`;
         } else {
+            // Format as XXXX XXXX XXXX XXXX for 13 to 16 digits
             formatted = `${cleaned.slice(0, 4)} ${cleaned.slice(4, 8)} ${cleaned.slice(8, 12)} ${cleaned.slice(12, 16)}`;
         }
-        input.value = formatted; // Update the input field with formatted value
+        // Update the input field with the formatted value
+        input.value = formatted; 
     }
-    //Navigation Bar
-    let flag = false;
-    let nav = document.querySelector('.van')
-    let line = document.querySelectorAll('.line')
-    function switch1() {
-    if (flag == false) {
-        setTimeout(() => {
-        nav.classList.add('show');
-        }, 100);
-        line[0].classList.add('alter-1');
-        line[1].classList.add('alter-2');
-        line[2].classList.add('alter-3');
-        flag = true;
-    }
-    else if (flag == true) {
-        setTimeout(() => {
-        nav.classList.remove('show');
-        }, 100);
-        line[0].classList.remove('alter-1');
-        line[1].classList.remove('alter-2');
-        line[2].classList.remove('alter-3');
-        flag = false;
-    }
-    }
-    window.addEventListener("load", function() {
-    const preloader = document.querySelector(".wrapper");
-    preloader.style.transition = "opacity 0.5s ease";
-    preloader.style.opacity = "0";
 
-    setTimeout(() => {
-        preloader.style.display = "none";
-    }, 500);
-    });
-</script>
+    // Navigation Bar Toggle functionality
+    let flag = false; // Flag to track whether the navigation is shown or hidden
+    let nav = document.querySelector('.van'); // Select the navigation element
+    let line = document.querySelectorAll('.line'); // Select the elements representing lines (menu icon)
+
+    // Function to switch the state of the navigation menu and lines
+    function switch1() {
+        if (flag == false) {
+            // If the menu is not visible, show it after 100ms
+            setTimeout(() => {
+                nav.classList.add('show');
+            }, 100);
+
+            // Add animation classes to transform the lines into a hamburger icon
+            line[0].classList.add('alter-1');
+            line[1].classList.add('alter-2');
+            line[2].classList.add('alter-3');
+
+            flag = true; // Set the flag to true indicating the menu is shown
+        } else if (flag == true) {
+            // If the menu is visible, hide it after 100ms
+            setTimeout(() => {
+                nav.classList.remove('show');
+            }, 100);
+
+            // Remove the animation classes from the lines to reset the hamburger icon
+            line[0].classList.remove('alter-1');
+            line[1].classList.remove('alter-2');
+            line[2].classList.remove('alter-3');
+
+            flag = false; // Set the flag to false indicating the menu is hidden
+        }
+    }
+</script>    
 </body>
 </html>
